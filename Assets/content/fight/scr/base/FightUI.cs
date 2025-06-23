@@ -101,6 +101,7 @@ public class FightUI : UIBase
         {
             cardItemList[i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.5f);
             startPos.x = startPos.x + offset;
+            //Debug.Log($"Œª÷√{i}£∫" + startPos);
         }
     }
 

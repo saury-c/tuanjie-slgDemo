@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIEventTrigger : MonoBehaviour, IPointerClickHandler
+public class UIEventTrigger : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     public Action<GameObject, PointerEventData> onClick;
-
+    public Action<GameObject, PointerEventData> onEnter;
+    public Action<GameObject, PointerEventData> onExit;
     public static UIEventTrigger Get(GameObject obj)
     {
         UIEventTrigger trigger = obj.GetComponent<UIEventTrigger>();
@@ -22,6 +23,16 @@ public class UIEventTrigger : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         onClick?.Invoke(gameObject, eventData);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        onEnter?.Invoke(gameObject, eventData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        onExit?.Invoke(gameObject, eventData);
     }
 
 }

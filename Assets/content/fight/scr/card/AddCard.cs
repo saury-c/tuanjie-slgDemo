@@ -7,33 +7,30 @@ public class AddCard : CardItem
 {
     public override void OnEndDrag(PointerEventData eventData)
     {
-        if(TryUse() == true)
+        if (TryUse() == true)
         {
             int val = int.Parse(vals[0]);
-            if(FightCardManager.Instance.HasCard(val) == true)
+            if (FightCardManager.Instance.HasCard(val) == true)
             {
-                UIManager.Instance.GetUI<FightUI>("FightUI").CreateCardItem(val);
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdateCardItemPos();
+                // 播放无中生有特效
                 Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2.5f));
                 PlayEffect(pos);
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdataUsedCardCount();
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdataCardCount();
+
+                UIManager.Instance.GetUI<FightUI>("FightUI").CreateCardItem(val);
             }
             else
             {
                 base.OnEndDrag(eventData);
                 FightCardManager.Instance.RefreahCard();
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdataUsedCardCount();
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdataCardCount();
-                UIManager.Instance.GetUI<FightUI>("FightUI").CreateCardItem(val);
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdataUsedCardCount();
-                UIManager.Instance.GetUI<FightUI>("FightUI").UpdataCardCount();
             }
+            UIManager.Instance.GetUI<FightUI>("FightUI").UpdateCardItemPos();
+            UIManager.Instance.GetUI<FightUI>("FightUI").UpdataUsedCardCount();
+            UIManager.Instance.GetUI<FightUI>("FightUI").UpdataCardCount();
         }
         else
         {
             base.OnEndDrag(eventData);
         }
-        
+
     }
 }

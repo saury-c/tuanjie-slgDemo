@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +15,26 @@ public class VictoryUI : UIBase
         Register("card01").onClick = GetCard1;
         Register("card02").onClick = GetCard2;
         VictoryEvent();
+        //
+        TextMeshProUGUI txt = transform.Find("txt_des").GetComponent<TextMeshProUGUI>();
+        Register("card01").onEnter = (GameObject go, PointerEventData e) =>
+        {
+            txt.text = GameConfigManager.Instance.GetById(ConfigType.Card, card1.ToString())["Des"];
+            txt.gameObject.SetActive(true);
+        };
+        Register("card01").onExit = (GameObject go, PointerEventData e) =>
+        {
+            txt.gameObject.SetActive(false);
+        };
+        Register("card02").onEnter = (GameObject go, PointerEventData e) =>
+        {
+            txt.text = GameConfigManager.Instance.GetById(ConfigType.Card, card2.ToString())["Des"];
+            txt.gameObject.SetActive(true);
+        };
+        Register("card02").onExit = (GameObject go, PointerEventData e) =>
+        {
+            txt.gameObject.SetActive(false);
+        };
     }
 
     private void VictoryEvent(int val = 30)
