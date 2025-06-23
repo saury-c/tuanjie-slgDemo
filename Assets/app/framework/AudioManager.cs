@@ -27,7 +27,14 @@ public class AudioManager : MonoBehaviour
     public void PlayEffect(string name)
     {
         AudioClip clip = Resources.Load<AudioClip>("Sounds/" + name);
-        AudioSource.PlayClipAtPoint(clip, transform.position);
+        if (clip != null)
+        {
+            AudioSource.PlayClipAtPoint(clip, transform.position);
+        }
+        else
+        {
+            Debug.Log("找不到播放音效:" + "Sounds/" + name);
+        }
     }
 
 }

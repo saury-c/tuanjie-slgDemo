@@ -11,8 +11,8 @@ public class Fight_PlayerTurn : FightUnit
         onPlayerTurn =  Object.Instantiate(Resources.Load("Events/OnPlayerTurn")) as VoidEventSO;
         
         onPlayerTurn.RaisedEvent();
-        Debug.Log("Player Time");
-        UIManager.Instance.ShowTip("Player Turn", Color.green, delegate ()
+        //Debug.Log("Player Time");
+        UIManager.Instance.ShowTip("Íæ¼ÒÐÐ¶¯", Color.green, delegate ()
         {
 
             FightManager.Instance.CurPowerCount = FightManager.Instance.MaxPowerCount;
@@ -24,7 +24,7 @@ public class Fight_PlayerTurn : FightUnit
                 UIManager.Instance.GetUI<FightUI>("FightUI").UpdataUsedCardCount();
             }
 
-            Debug.Log("Draw");
+            //Debug.Log("Draw");
             UIManager.Instance.GetUI<FightUI>("FightUI").CreateCardItem(4);
             UIManager.Instance.GetUI<FightUI>("FightUI").UpdateCardItemPos();
             UIManager.Instance.GetUI<FightUI>("FightUI").UpdataCardCount();

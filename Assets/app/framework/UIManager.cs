@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
         content.color = color;
 
         Tween scale1 = obj.transform.Find("bg").DOScale(1, 0.4f);
-        Tween scale2 = obj.transform.Find("bg").DOScale(0, 0.4f);
+        Tween scale2 = obj.transform.Find("bg").DOScale(0.6f, 0.4f);
         Sequence seq = DOTween.Sequence();
         seq.Append(scale1);
         seq.AppendInterval(0.5f);

@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour
 
 
 
-
     public List<string> actions;
 
     [Header("UI")]

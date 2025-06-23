@@ -13,9 +13,9 @@ public class Fight_EnemyTurn : FightUnit
         
         onEnemyTurn.RaisedEvent();
         UIManager.Instance.GetUI<FightUI>("FightUI").RemoveAllCard();
-        UIManager.Instance.ShowTip("Enemy Turn", Color.red, delegate ()
+        UIManager.Instance.ShowTip("怪物行动", Color.red, delegate ()
         {
-            Debug.Log("怪物行动");
+            //Debug.Log("怪物行动");
             FightManager.Instance.StartCoroutine(EnemyManager.Instacne.DoAllEnemyAction());
         });
     }

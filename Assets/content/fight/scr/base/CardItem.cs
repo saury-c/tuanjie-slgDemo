@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardItem : MonoBehaviour
+public class CardItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
     public Dictionary<string, string> data;
@@ -18,10 +19,10 @@ public class CardItem : MonoBehaviour
         vals = data["Arg"].Split("/");
         transform.Find("bg").GetComponent<Image>().sprite = Resources.Load<Sprite>(data["BgIcon"]);
         transform.Find("bg/icon").GetComponent<Image>().sprite = Resources.Load<Sprite>(data["Icon"]);
-        transform.Find("bg/msgTxt").GetComponent<Text>().text = string.Format(data["Des"], vals);
-        transform.Find("bg/nameTxt").GetComponent<Text>().text = data["Name"];
-        transform.Find("bg/useTxt").GetComponent<Text>().text = data["Expend"];
-        transform.Find("bg/Text").GetComponent<Text>().text = GameConfigManager.Instance.GetById(ConfigType.CardType, data["Type"])["Name"];
+        transform.Find("bg/msgTxt").GetComponent<TextMeshProUGUI>().text = string.Format(data["Des"], vals);
+        transform.Find("bg/nameTxt").GetComponent<TextMeshProUGUI>().text = data["Name"];
+        transform.Find("bg/useTxt").GetComponent<TextMeshProUGUI>().text = data["Expend"];
+        transform.Find("bg/Text").GetComponent<TextMeshProUGUI>().text = GameConfigManager.Instance.GetById(ConfigType.CardType, data["Type"])["Name"];
 
         transform.Find("bg").GetComponent<Image>().material = Instantiate(Resources.Load<Material>("Mats/outline"));
     }
@@ -81,7 +82,7 @@ public class CardItem : MonoBehaviour
         if (cost > FightManager.Instance.CurPowerCount)
         {
             AudioManager.Instance.PlayEffect("Effect/lose");
-            UIManager.Instance.ShowTip("费用不足", Color.red);
+            UIManager.Instance.ShowTip("消耗点数不足", Color.red);
             return false;
         }
         else
@@ -96,9 +97,19 @@ public class CardItem : MonoBehaviour
 
     public void PlayEffect(Vector3 pos)
     {
-        GameObject effectObj = Instantiate(Resources.Load(data["Effects"])) as GameObject;
-        effectObj.transform.position = pos;
-        Destroy(effectObj, 2);
+        var effect = Resources.Load(data["Effects"]);
+        if (effect != null)
+        {
+            GameObject effectObj = Instantiate(effect) as GameObject;
+            effectObj.transform.position = pos;
+            Destroy(effectObj, 2);
+        }
+        else
+        {
+            Debug.LogWarning("找不到播放特效" + data["Effects"].ToString());
+        }
+
+
 
     }
 

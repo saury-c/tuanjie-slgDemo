@@ -5,27 +5,28 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 using static UnityEditor.Timeline.Actions.MenuPriority;
 using DG.Tweening;
+using TMPro;
 
 public class FightUI : UIBase
 {
-    private Text cardCountTxt;
-    private Text usedCardCountTxt;
-    private Text powerTxt;
-    private Text hpTxt;
+    private TextMeshProUGUI cardCountTxt;
+    private TextMeshProUGUI usedCardCountTxt;
+    private TextMeshProUGUI powerTxt;
+    private TextMeshProUGUI hpTxt;
     private Image hpImg;
-    private Text dfTxt;
+    private TextMeshProUGUI dfTxt;
     private List<CardItem> cardItemList;
 
 
     private void Awake()
     {
         cardItemList = new List<CardItem>();
-        usedCardCountTxt = transform.Find("node_right/txt_card_no").GetComponent<Text>();
-        cardCountTxt = transform.Find("node_left/spf_card_has").GetComponent<Text>();
-        powerTxt = transform.Find("node_left/txt_point").GetComponent<Text>();
-        hpTxt = transform.Find("node_left/HpItem/txt_hp").GetComponent<Text>();
+        usedCardCountTxt = transform.Find("node_right/txt_card_no").GetComponent<TextMeshProUGUI>();
+        cardCountTxt = transform.Find("node_left/txt_card_has").GetComponent<TextMeshProUGUI>();
+        powerTxt = transform.Find("node_left/txt_point").GetComponent<TextMeshProUGUI>();
+        hpTxt = transform.Find("node_left/HpItem/txt_hp").GetComponent<TextMeshProUGUI>();
         hpImg = transform.Find("node_left/HpItem/sp_hp").GetComponent<Image>();
-        dfTxt = transform.Find("node_left/HpItem/txt_defend").GetComponent<Text>();
+        dfTxt = transform.Find("node_left/HpItem/txt_defend").GetComponent<TextMeshProUGUI>();
 
         transform.Find("node_right/btn_turn_end").GetComponent<Button>().onClick.AddListener(onChangeTurnBtn);
     }
@@ -81,10 +82,9 @@ public class FightUI : UIBase
         for (int i = 0; i < count; ++i)
         {
             GameObject obj = Instantiate(Resources.Load("UI/CardItem"), transform) as GameObject;
-            obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1000, -700);
+            obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(-1000, -450);
             string cardId = FightCardManager.Instance.DrawCard();
             Dictionary<string, string> data = GameConfigManager.Instance.GetById(ConfigType.Card, cardId);
-
 
             CardItem item = obj.AddComponent(System.Type.GetType(data["Script"])) as CardItem;
 
@@ -96,7 +96,7 @@ public class FightUI : UIBase
     public void UpdateCardItemPos()
     {
         float offset = 800f / cardItemList.Count;
-        Vector2 startPos = new Vector2(-cardItemList.Count / 2f * offset + offset * 0.5f, -500);
+        Vector2 startPos = new Vector2(-cardItemList.Count / 2f * offset + offset * 0.5f, -450);
         for (int i = 0; i < cardItemList.Count; ++i)
         {
             cardItemList[i].GetComponent<RectTransform>().DOAnchorPos(startPos, 0.5f);
@@ -114,7 +114,7 @@ public class FightUI : UIBase
         cardItemList.Remove(item);
         UpdateCardItemPos();
 
-        item.GetComponent<RectTransform>().DOAnchorPos(new Vector2(1000, -700), 0.25f);
+        item.GetComponent<RectTransform>().DOAnchorPos(new Vector2(1000, -450), 0.25f);
         item.transform.DOScale(0, 0.25f);
         Destroy(item.gameObject, 1);
     }
