@@ -19,7 +19,11 @@ public class VictoryUI : UIBase
         TextMeshProUGUI txt = transform.Find("txt_des").GetComponent<TextMeshProUGUI>();
         Register("card01").onEnter = (GameObject go, PointerEventData e) =>
         {
-            txt.text = GameConfigManager.Instance.GetById(ConfigType.Card, card1.ToString())["Des"];
+            Dictionary<string, string> dict = GameConfigManager.Instance.GetById(ConfigType.Card, card1.ToString());
+            string des = dict["Des"]; // 模板文本
+            string[] args = dict["Arg"].Split('/'); // 切割参数
+            string finalText = string.Format(des, args); // 替换模板中的 {0}、{1}
+            txt.text = finalText;
             txt.gameObject.SetActive(true);
         };
         Register("card01").onExit = (GameObject go, PointerEventData e) =>
@@ -28,7 +32,11 @@ public class VictoryUI : UIBase
         };
         Register("card02").onEnter = (GameObject go, PointerEventData e) =>
         {
-            txt.text = GameConfigManager.Instance.GetById(ConfigType.Card, card2.ToString())["Des"];
+            Dictionary<string, string> dict = GameConfigManager.Instance.GetById(ConfigType.Card, card2.ToString());
+            string des = dict["Des"]; // 模板文本
+            string[] args = dict["Arg"].Split('/'); // 切割参数
+            string finalText = string.Format(des, args); // 替换模板中的 {0}、{1}
+            txt.text = finalText;
             txt.gameObject.SetActive(true);
         };
         Register("card02").onExit = (GameObject go, PointerEventData e) =>
