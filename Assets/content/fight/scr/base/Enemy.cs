@@ -19,15 +19,11 @@ public class Enemy : MonoBehaviour
     public Dictionary<string, string> data;
     public ActionType type;
     public GameObject hpItemObj;
-    public GameObject actionObj;
-
 
 
     public List<string> actions;
 
     [Header("UI")]
-    public Transform attackTf;
-    public Transform defendTf;
     public TextMeshProUGUI defendTxt;
     public TextMeshProUGUI hpTex;
     public Image hpImg;
@@ -55,24 +51,16 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _meshRenderer = transform.GetComponentInChildren<SkinnedMeshRenderer>();
-
+        ani = transform.GetComponent<Animator>();
 
         type = ActionType.None;
         hpItemObj = UIManager.Instance.CreateHpItem();
-        actionObj = UIManager.Instance.CreateActionIcon();
-
-        attackTf = actionObj.transform.Find("attack");
-        defendTf = actionObj.transform.Find("defend");
 
         defendTxt = hpItemObj.transform.Find("txt_defend").GetComponent<TextMeshProUGUI>();
         hpTex = hpItemObj.transform.Find("txt_hp").GetComponent<TextMeshProUGUI>();
         hpImg = hpItemObj.transform.Find("sp_hp").GetComponent<Image>();
 
-        hpItemObj.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.down * 0.2f);
-        actionObj.transform.position = Camera.main.WorldToScreenPoint(transform.Find("head").position);
-
-        ani = transform.GetComponent<Animator>();
-
+        hpItemObj.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.down * 0.25f);
         SetRandomAction();
 
         //≥ı ºªØ
@@ -84,8 +72,6 @@ public class Enemy : MonoBehaviour
         CurPow = MaxPow;
         UpdateHp();
         UpdateDefend();
-
-
     }
 
     public void SetRandomAction()
@@ -116,14 +102,7 @@ public class Enemy : MonoBehaviour
         defendTxt.text = Defend.ToString();
     }
 
-    public void OnSelect()
-    {
-        // _meshRenderer.material.SetColor("_OtlColoer",Color.red);
-    }
-    public void OnUnSelect()
-    {
-        // _meshRenderer.material.SetColor("_OtlColoer", Color.black);
-    }
+
     public void Hit(int val)
     {
         if (gameObject.GetComponent<HurtAddDefence>())
@@ -156,7 +135,6 @@ public class Enemy : MonoBehaviour
                 }
 
                 Destroy(gameObject);
-                Destroy(actionObj);
                 Destroy(hpItemObj);
             }
             else
@@ -168,15 +146,9 @@ public class Enemy : MonoBehaviour
         UpdateHp();
     }
 
-    public void HideAction()
-    {
-        attackTf.gameObject.SetActive(false);
-        defendTf.gameObject.SetActive(false);
-    }
 
     public IEnumerator DoAction()
     {
-        HideAction();
         //ani.Play("attack");
         yield return new WaitForSeconds(0.5f);
         int doCount = 0;

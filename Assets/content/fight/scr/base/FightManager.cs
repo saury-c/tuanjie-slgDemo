@@ -11,7 +11,7 @@ public enum FightType
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
-    public FightUnit fightUnit;
+    public FightUnit fightUnit; // 当前回合状态
 
 
     public int MaxHp;
@@ -40,7 +40,7 @@ public class FightManager : MonoBehaviour
     }
 
 
- 
+
     public void ChangeType(FightType type)
     {
         switch (type)

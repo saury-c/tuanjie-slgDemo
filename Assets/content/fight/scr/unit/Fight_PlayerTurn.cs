@@ -10,11 +10,10 @@ public class Fight_PlayerTurn : FightUnit
     {
         onPlayerTurn =  Object.Instantiate(Resources.Load("Events/OnPlayerTurn")) as VoidEventSO;
         
-        onPlayerTurn.RaisedEvent();
         //Debug.Log("Player Time");
         UIManager.Instance.ShowTip("Íæ¼ÒÐÐ¶¯", Color.green, delegate ()
         {
-
+            onPlayerTurn.RaisedEvent();
             FightManager.Instance.CurPowerCount = FightManager.Instance.MaxPowerCount;
             UIManager.Instance.GetUI<FightUI>("FightUI").UpdataPower();
 

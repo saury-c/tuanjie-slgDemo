@@ -45,20 +45,18 @@ public class EnemyManager
             string enemyId = enemyIds[i];
             string[] posArr = enemyPos[i].Split(',');
 
-
             Vector3 pos = new Vector3(float.Parse(posArr[0]), float.Parse(posArr[1]), float.Parse(posArr[2]));
 
             Dictionary<string, string> enemyData = GameConfigManager.Instance.GetById(ConfigType.Enemy, enemyId);
 
             GameObject obj = Object.Instantiate(Resources.Load(enemyData["Model"])) as GameObject;
+            obj.GetComponent<SpriteRenderer>().sortingOrder = 5;
 
             Enemy enemy = obj.AddComponent<Enemy>();
             enemy.Init(enemyData);
             enemyList.Add(enemy);
 
             obj.transform.position = pos;
-
-
         }
 
     }

@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    private Transform canvasTf;
+    public Transform canvasTf;
     private List<UIBase> uiList;
 
     private void Awake()
@@ -91,13 +91,6 @@ public class UIManager : MonoBehaviour
     }
 
 
-
-    public GameObject CreateActionIcon()
-    {
-        GameObject obj = Instantiate(Resources.Load("UI/actionIcon"), canvasTf) as GameObject;
-        obj.transform.SetAsFirstSibling();
-        return obj;
-    }
     public GameObject CreateHpItem()
     {
         GameObject obj = Instantiate(Resources.Load("UI/HpItem"), canvasTf) as GameObject;
