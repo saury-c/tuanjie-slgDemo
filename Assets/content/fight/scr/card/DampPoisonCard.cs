@@ -62,7 +62,6 @@ public class DampPoisonCard : CardItem, IPointerDownHandler
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             hitEnemy = hit.transform.GetComponent<Enemy>();
-            hitEnemy.OnSelect();
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -91,7 +90,6 @@ public class DampPoisonCard : CardItem, IPointerDownHandler
                         hitEnemy.gameObject.GetComponent<PoisonDebuff>().AddDamage(val);
                     }
                 }
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
 
@@ -100,7 +98,6 @@ public class DampPoisonCard : CardItem, IPointerDownHandler
         {
             if (hitEnemy != null)
             {
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
         }

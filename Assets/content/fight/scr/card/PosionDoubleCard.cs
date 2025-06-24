@@ -62,7 +62,6 @@ public class PosionDoubleCard : CardItem, IPointerDownHandler
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             hitEnemy = hit.transform.GetComponent<Enemy>();
-            hitEnemy.OnSelect();
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -81,7 +80,6 @@ public class PosionDoubleCard : CardItem, IPointerDownHandler
                         hitEnemy.gameObject.GetComponent<PoisonDebuff>().AddDamage(hitEnemy.gameObject.GetComponent<PoisonDebuff>().damage);
                     }
                 }
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
 
@@ -90,7 +88,6 @@ public class PosionDoubleCard : CardItem, IPointerDownHandler
         {
             if (hitEnemy != null)
             {
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
         }

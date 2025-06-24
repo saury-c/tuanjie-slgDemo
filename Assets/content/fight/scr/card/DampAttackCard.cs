@@ -60,7 +60,6 @@ public class DampAttackCard : CardItem
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             hitEnemy = hit.transform.GetComponent<Enemy>();
-            hitEnemy.OnSelect();
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -87,7 +86,6 @@ public class DampAttackCard : CardItem
                     //useCard?.OnEventRaised(this);
                     hitEnemy.Hit(val);
                 }
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
 
@@ -96,7 +94,6 @@ public class DampAttackCard : CardItem
         {
             if (hitEnemy != null)
             {
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
         }

@@ -62,7 +62,6 @@ public class PoisonAttackCard : CardItem, IPointerDownHandler
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             hitEnemy = hit.transform.GetComponent<Enemy>();
-            hitEnemy.OnSelect();
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -88,7 +87,6 @@ public class PoisonAttackCard : CardItem, IPointerDownHandler
                     //useCard?.OnEventRaised(this);
                     hitEnemy.Hit(val);
                 }
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
 
@@ -97,7 +95,6 @@ public class PoisonAttackCard : CardItem, IPointerDownHandler
         {
             if (hitEnemy != null)
             {
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
         }

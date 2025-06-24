@@ -62,7 +62,6 @@ public class AttackUnAttackCard : CardItem, IPointerDownHandler
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             hitEnemy = hit.transform.GetComponent<Enemy>();
-            hitEnemy.OnSelect();
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -78,7 +77,6 @@ public class AttackUnAttackCard : CardItem, IPointerDownHandler
                     hitEnemy.CurPow = -1;
                     hitEnemy.Hit(val);
                 }
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
 
@@ -87,7 +85,6 @@ public class AttackUnAttackCard : CardItem, IPointerDownHandler
         {
             if (hitEnemy != null)
             {
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
         }

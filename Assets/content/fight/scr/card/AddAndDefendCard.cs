@@ -62,7 +62,6 @@ public class AddAndDefendCard : CardItem, IPointerDownHandler
         if (Physics.Raycast(ray, out hit, 10000, LayerMask.GetMask("Enemy")))
         {
             hitEnemy = hit.transform.GetComponent<Enemy>();
-            hitEnemy.OnSelect();
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -79,7 +78,6 @@ public class AddAndDefendCard : CardItem, IPointerDownHandler
                     FightManager.Instance.DefenseCount += int.Parse(vals[1]);
                     UIManager.Instance.GetUI<FightUI>("FightUI").UpdataDefense();
                 }
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
 
@@ -88,7 +86,6 @@ public class AddAndDefendCard : CardItem, IPointerDownHandler
         {
             if (hitEnemy != null)
             {
-                hitEnemy.OnUnSelect();
                 hitEnemy = null;
             }
         }
