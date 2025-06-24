@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
 
         bgmSource.clip = clip;
         bgmSource.loop = isLoop;
+        bgmSource.volume = 0.5f;
         bgmSource.Play();
     }
 

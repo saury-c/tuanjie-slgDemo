@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 using DG.Tweening;
 using TMPro;
 
